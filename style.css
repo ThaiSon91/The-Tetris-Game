@@ -1,0 +1,27 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  display: flex;
+  grid-template-columns: 320px 200px;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.slide-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#board {
+  border: 2px solid black;
+}
+
+.play-btn {
+  background-color: greenyellow;
+  font-size: 16px;
+  padding: 15px 30px;
+  cursor: pointer;
+}
