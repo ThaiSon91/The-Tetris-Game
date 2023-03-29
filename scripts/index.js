@@ -221,17 +221,44 @@ class Board {
   drawBoard() {
     for (let row = 0; row < this.grid.length; row++) {
       for (let col = 0; col < this.grid[0].length; col++)
-        this.drawCell(col, row, WHITE_COLOR_ID);
+        this.drawCell(col, row, this.grid[row][col]);
     }
   }
 }
+
+handleCompleteRows () {
+  const latestGrid = board.grid.filter((row) => {//row => []
+    return row.some(col => col === WHITE_COLOR_ID);
+  });
+const newScore = ROWS - latestGrid.length;
+const newRows = Array.from({length: newScore}, ()=> Array(COLS).fill(WHITE_COLOR_ID))
+if (newScore) {
+  board.grid = [...newRows, ...latestGrid];
+  this.handleScore(newScore * 10);
+
+  this.clearAudio.play();
+  console.log({latestGrid});
+  }
+}
+
+handleScore (newScore) {
+  this.score += newScore;
+  document.getElementById("score").innerHTML = this.score;
+}
+handleGameOver (){
+  this.gameOver = true;
+  this.isPlaying = false;
+  alert('GAME OVER!!!');
+
+}
+
 class Brick {
   constructor(id) {
     this.id = id;
     this.layout = BRICK_LAYOUT[id];
     this.activeIndex = 0;
     this.colPos = 3;
-    this.rowPos = 3;
+    this.rowPos = -2;
   }
   //draw brick
   draw() {
